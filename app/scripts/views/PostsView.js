@@ -29,7 +29,7 @@ const PostsView = Backbone.View.extend({
     postsCollection.forEach((post) => {
       let postItemView = new PostItemView({ model: post })
       postItemView.render()
-      this.$('ul').append(postItemView.$el)
+      this.$('ul').prepend(postItemView.$el)
     }).then
     return this
   },

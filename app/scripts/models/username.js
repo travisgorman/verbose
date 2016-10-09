@@ -25,7 +25,10 @@ const Session = Backbone.Model.extend({
     }, {
       success: (model, response) => { 
         this.unset('password')
+        // this.set('username', response.username)
+        // this.set('authtoken', response._kmd.authtoken)
         window.localStorage.setItem('authtoken', response._kmd.authtoken)
+        window.localStorage.setItem('username', response.username)
         router.navigate('posts', { trigger: true })
       },
       error: function(response) {

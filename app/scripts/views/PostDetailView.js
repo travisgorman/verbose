@@ -9,14 +9,9 @@ const PostDetailView = Backbone.View.extend({
     console.log('detailV this:', this )
 
     this.model = postsCollection.get(postId);
-    // fetch the model
-    // listen to the model for changes and re-run render when it is successful
     this.model.on('change', (model) => this.render())
 
     console.log('this.model:', this.model )
-
-    // this.listenTo(this.model, 'change', this.render())
-    // this.model.on('change', (model) => this.render())
   },
 
   tagName: 'article',

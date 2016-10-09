@@ -2,17 +2,18 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 import postsCollection from '../collections/posts';
 import router from '../router';
-import user from '../models/username';
+import session from '../models/username';
 
 const PostForm = Backbone.View.extend({
   className: 'post-form',
   events: {
     'click input[type="submit"]' : 'newPost',
   },
+
   newPost: function(e) {
     e.preventDefault()
     postsCollection.create({
-      author: user.username,
+      author: session.username,
       title: $('.new-post-title').val(),
       body: $('textarea').val()
     }, {
@@ -24,7 +25,8 @@ const PostForm = Backbone.View.extend({
       }
     })
   },
-  render: function() {
+
+  template: function() {
     return `
     <h2>Write a new Post</h2>
     <form>
@@ -33,6 +35,13 @@ const PostForm = Backbone.View.extend({
       <input type="submit" name="submit" value="submit"/>
     </form>
     `
-  }
+  },
+
+  render: function() {
+    this.$el.html(this.template())
+    return this
+  },
+
 })
- export default PostForm
+
+export default PostForm
