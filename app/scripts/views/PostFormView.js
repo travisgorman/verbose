@@ -5,7 +5,12 @@ import router from '../router';
 import session from '../models/username';
 
 const PostForm = Backbone.View.extend({
+  initialize: function() {
+    console.log('postForm session username:', session.get('username') )
+  },
+
   className: 'post-form',
+
   events: {
     'click input[type="submit"]' : 'newPost',
   },
@@ -13,7 +18,7 @@ const PostForm = Backbone.View.extend({
   newPost: function(e) {
     e.preventDefault()
     postsCollection.create({
-      author: session.username,
+      author: session.get('username'),
       title: $('.new-post-title').val(),
       body: $('textarea').val()
     }, {
