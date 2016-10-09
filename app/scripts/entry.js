@@ -8,8 +8,6 @@ import session from './models/username'
 $(document).ajaxSend( (e, xhr) => {
   if (localStorage.getItem('authtoken')) {
     xhr.setRequestHeader('Authorization', `Kinvey ${localStorage.getItem('authtoken')}`)
-    // session.set('username', localStorage.getItem('username'))
-    // session.set('authtoken', localStorage.getItem('authtoken')) 
   } 
   else {
     xhr.setRequestHeader('Authorization', `Basic ${settings.basicAuth}`)

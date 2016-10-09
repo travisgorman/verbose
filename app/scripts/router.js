@@ -45,7 +45,9 @@ const Router = Backbone.Router.extend({
     session.save(null, {
       url: `https://baas.kinvey.com/user/${settings.appKey}/_logout`,
       success: () => {
+        window.localStorage.clear()
         session.clear()
+        console.log('You are LOGGED OUT:', session )
         this.navigate('login', { trigger: true })
       }
     })
