@@ -1,28 +1,31 @@
-import Backbone from 'backbone';
-import $ from 'jquery';
-import postsCollection from '../collections/posts';
-import router from '../router';
-import session from '../models/username';
+import $ from 'jquery'
+import Backbone from 'backbone'
+import router from '../router'
+import session from '../models/username'
+import PostItemView from './PostItemView'
+import postsCollection from '../collections/posts'
 
-const PostForm = Backbone.View.extend({
+
+const EditPostView = Backbone.View.extend({
   initialize: function() {
+
     console.log('postForm session:', session)
     console.log('postForm session:', session.get('username') )
-    console.log('postForm session JSON:', JSON.stringify(session.get('username')) )
-
+    console.log('postForm session JSON:', JSON.stringify(session.get('username')))
   },
 
-  className: 'post-form',
+  className: 'edit-form',
 
   events: {
-    'click input[type="submit"]' : 'newPost',
+    'click input[type="submit"]' : 'editPost',
   },
 
-  newPost: function(e) {
+  editPost: function(e) {
     e.preventDefault()
-    postsCollection.create({
-      author: session.get('username'),
-      title: $('.new-post-title').val(),
+    let body = this.model.get('body')
+    let title = this.model.get('title')
+
+    this.model.save({
       body: $('textarea').val()
     }, {
       success: function(response) {
@@ -36,10 +39,10 @@ const PostForm = Backbone.View.extend({
 
   template: function() {
     return `
-    <h2>Write a new Post</h2>
+    <h2>Edit Post</h2>${this.model.get('_id')}
     <form>
       <input type="text" name="title" class="new-post-title" placeholder="Title"/>
-      <textarea name="body" placeholder="write something here"></textarea>
+      <textarea name="body" placeholder="Change the message"></textarea>
       <input type="submit" name="submit" value="submit"/>
     </form>
     `
@@ -52,4 +55,4 @@ const PostForm = Backbone.View.extend({
 
 })
 
-export default PostForm
+export default EditPostView

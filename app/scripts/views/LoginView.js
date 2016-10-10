@@ -5,15 +5,18 @@ import router from '../router';
 
 const LoginView = Backbone.View.extend({
   className: 'login-form',
+
   events: {
     'submit' : 'submitFunction'
   },
+
   submitFunction: function(e) {
+    e.preventDefault()
     let username = $('#username').val()
     let password = $('#password').val()
-    e.preventDefault()
     session.login(username, password)
   },
+  
   template: function() {
     return `
     <form>
@@ -30,7 +33,9 @@ const LoginView = Backbone.View.extend({
         name="submit"
         id="loginBtn"
         value="submit">
-      <p>Not a member yet? <a href="#signup">Sign up</a></p>
+      <p>Not a member yet? 
+        <a href="#signup">Sign up</a>
+      </p>
     </form>
     `
   },

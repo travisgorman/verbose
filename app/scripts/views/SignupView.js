@@ -4,32 +4,20 @@ import session from '../models/username';
 import settings from '../settings'
 
 const SignupView = Backbone.View.extend({
+
   className: 'signup-form',
+
   events: {
     'submit' : 'signupFunction'
   },
-  submitFunction: function(e) {
+
+  signupFunction: function(e) {
+    e.preventDefault()
     let username = this.$('#username').val()
     let password = this.$('#password').val()
-    var encrypted = `${settings.basicAuth}`
-    e.preventDefault()
-    $.ajax({
-      type: 'POST',
-      url: `https://baas.kinvey.com/user/${settings.appKey}/`,
-      data: JSON.stringify({ username: username, password: password }),
-      headers: { Authorization : `Basic ${encrypted}` },
-      contentType: 'application/json',
-      success: function(response) {
-        user.username = username
-        user.authtoken = response._kmd.authtoken
-        location.hash = '#posts'
-        console.log('SUCCESS you created a user', response)
-      },
-      error: function(response) {
-        console.log( 'ERROR', response )
-      }
-    })
+    session.signup(username, password)
   },
+
   template: function() {
     return `
     <form>

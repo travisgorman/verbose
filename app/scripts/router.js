@@ -9,15 +9,18 @@ import SignupView from './views/SignupView'
 import Nav from './views/Nav'
 import PostsView from './views/PostsView'
 import PostDetailView from './views/PostDetailView'
+import EditPostView from './views/EditPostView'
 
 const Router = Backbone.Router.extend({
   routes: {
-    login        : 'loginF',
-    signup       : 'signupF',
-    logout       : 'logoutF',
-    posts        : 'postsF',
-    'posts/:id'  : 'postF',
-    'post-form'  : 'newPostF',
+    login           : 'loginF',
+    signup          : 'signupF',
+    logout          : 'logoutF',
+    posts           : 'postsF',
+    'posts/:id'     : 'postF',
+    // edit modal
+    'post-form'     : 'newPostF',
+    'post-form/:id' : 'editPostF',
     '/*'         : 'loginF',
   },
 
@@ -77,10 +80,21 @@ const Router = Backbone.Router.extend({
   newPostF() {
     let nav = new Nav()
     let postForm = new PostForm()
- 
     $('#page').empty()
       .append(nav.render().$el)
         .append(postForm.render().$el)
+  },
+
+  editPostF(postId) {
+    postsCollection.off()
+    let postDetailView = new PostDetailView(postId)
+    let nav = new Nav()
+    let edit = new EditPostView()
+
+    $('#page').empty()
+      .append(nav.render().$el)
+        .append(postDetailView.render().$el)
+          .append(edit.render().$el)
   },
 
 })

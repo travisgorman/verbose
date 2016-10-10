@@ -11,6 +11,7 @@ const PostsView = Backbone.View.extend({
       console.log('I heard you added a new model:', this.cid)
       this.render()
     })
+    postsCollection.on('remove', () => console.log('i heard you deleted a model:', this.cid ) )
     postsCollection.fetch()
     console.log('PostsView this:', this )
   },

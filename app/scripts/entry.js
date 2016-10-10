@@ -14,5 +14,9 @@ $(document).ajaxSend( (e, xhr) => {
   }
 })
 
+ if (localStorage.getItem('authtoken')) {
+  session.retrieve();
+ }
+
 Backbone.history.start()
  
