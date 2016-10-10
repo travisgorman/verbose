@@ -93,7 +93,7 @@ const Router = Backbone.Router.extend({
 
     $('#page').empty()
       .append(nav.render().$el)
-        .append(postDetailView.render().$el)
+        // .append(postDetailView.render().$el)
           .append(edit.render().$el)
   },
 

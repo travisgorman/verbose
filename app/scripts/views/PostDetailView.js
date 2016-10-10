@@ -69,7 +69,9 @@ const PostDetailView = Backbone.View.extend({
   },
 
   editFunction: function(e) {
+    e.preventDefault()
     console.log('item edit event:', e )
+    router.navigate(`post-form/${this.model.get('_id')}`, {trigger: true})
   },
 
   deleteFunction: function(e) {
@@ -86,7 +88,7 @@ const PostDetailView = Backbone.View.extend({
     console.log('this.model:', this.model)
     console.log('edit post number:', this.model.get('_id'))
     
-    router.navigate(`post-form/${this.model.get('_id')}`, {trigger: true})
+    
 
     // this.save({
 

@@ -52,12 +52,12 @@ const PostItemView = Backbone.View.extend({
 
   editFunction: function(e) {
     console.log('item edit event:', e )
-    let editBox =  `
-    <textarea id=postEdit></textarea>
-    <input type="submit" value="change"/>
-    `
+    // let editBox =  `
+    // <textarea id=postEdit></textarea>
+    // <input type="submit" value="change"/>
+    // `
     // let edit
-
+    router.navigate(`post-form/${this.model.get('_id')}`, {trigger: true})
   },
   deleteFunction: function(e) {
     console.log('item delete event:', e )
