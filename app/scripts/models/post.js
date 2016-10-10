@@ -15,6 +15,7 @@ const Post = Backbone.Model.extend({
     this.set('likes', newLikes)
     this.save()
   },
+  
   edit: function() {
     this.save({
     type: 'PUT',

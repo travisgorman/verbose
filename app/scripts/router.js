@@ -86,10 +86,10 @@ const Router = Backbone.Router.extend({
   },
 
   editPostF(postId) {
-    postsCollection.off()
-    let postDetailView = new PostDetailView(postId)
+    // postsCollection.off()
     let nav = new Nav()
-    let edit = new EditPostView()
+    let postDetailView = new PostDetailView(postId)
+    let edit = new EditPostView(postId)
 
     $('#page').empty()
       .append(nav.render().$el)

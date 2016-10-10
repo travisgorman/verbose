@@ -7,11 +7,9 @@ import postsCollection from '../collections/posts'
 
 
 const EditPostView = Backbone.View.extend({
-  initialize: function() {
-
-    console.log('postForm session:', session)
-    console.log('postForm session:', session.get('username') )
-    console.log('postForm session JSON:', JSON.stringify(session.get('username')))
+  initialize: function(postId) {
+    this.model = postsCollection.get(postId)
+    console.log('this model:', this.model)
   },
 
   className: 'edit-form',
@@ -27,7 +25,8 @@ const EditPostView = Backbone.View.extend({
 
     this.model.save({
       body: $('textarea').val()
-    }, {
+    },
+    {
       success: function(response) {
         router.navigate('posts', {trigger: true})
       },
